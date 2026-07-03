@@ -96,6 +96,8 @@ function compute() {
         showError();
         return;
       }
+      result = prev / current;
+      break;
     case '%':
       if (current === 0) {
         showError();
