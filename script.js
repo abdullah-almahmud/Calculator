@@ -96,7 +96,12 @@ function compute() {
         showError();
         return;
       }
-      result = prev / current;
+    case '%':
+      if (current === 0) {
+        showError();
+        return;
+      }  
+      result = prev % current;
       break;
     default:
       return; 
@@ -140,7 +145,7 @@ keys.addEventListener('click', (e) => {
   const button = e.target;
   if (!button.matches('button')) return;
 
-  const value = button.textContent;
+  const value = button.dataset.op || button.dataset.num || button.textContent.trim();
 
   if (button.classList.contains('clear')) {
     clear();
@@ -158,7 +163,7 @@ keys.addEventListener('click', (e) => {
 // Handles keyboard input 
 document.addEventListener('keydown', (e) => {
   const isDigitOrDot = (e.key >= '0' && e.key <= '9') || e.key === '.';
-  const isOperator = ['+', '-', '*', '/'].includes(e.key);
+  const isOperator = ['+', '-', '*', '/', '%'].includes(e.key);
 
   if (isDigitOrDot) {
     handleInputNumber(e.key);
