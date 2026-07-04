@@ -136,7 +136,15 @@ function backspace() {
     clear();
     return;
   }
-  currentNum = currentNum.slice(0, -1);
+
+  if (currentNum !== '') {
+    currentNum = currentNum.slice(0, -1);
+  } else if (operation !== null) {
+    currentNum = previousNum;
+    previousNum = '';
+    operation = null;
+  }
+
   displayCalculation();
 }
 
